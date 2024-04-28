@@ -20,6 +20,34 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
+## Creation sequence
+The following is the sequence to create the base project:
+```
+# 1. NextJS create app
+npx create-next-app@latest ./ --typescript --tailwind --eslint
+
+# 2. Install component library ShadCn (stone)
+npx shadcn-ui@latest init
+
+# 3. Install clerk (clerk.com) authentication and user management saas support dependencies
+npm install @clerk/nextjs
+
+# 4. Install next-themes dependencies
+npm i next-themes
+
+# 5. Install ShadCn some components
+npx shadcn-ui@latest add button
+npx shadcn-ui@latest add dropdown-menu
+
+```
+
+
+
+
+
+
+
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

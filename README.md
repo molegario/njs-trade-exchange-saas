@@ -31,16 +31,25 @@ npx shadcn-ui@latest init
 ```
 #### 3. Install clerk (clerk.com) authentication and user management saas support dependencies
 ```bash
-npm install @clerk/nextjs
+npm i @clerk/nextjs
 ```
-#### 4. Install next-themes dependencies
+#### 4. Check/Install dependencies where needed:
 ```bash
 npm i next-themes
+npm i react-hot-toast
+#
+# CHECK ONLY - installed as dependencies of shadcn form
+#
+# npm i zod
+# npm i react-hook-form
+# npm i @hookform/resolvers
 ```
-#### 5. Install ShadCn some components
+#### 5. Install ShadCn components
 ```bash
 npx shadcn-ui@latest add button
 npx shadcn-ui@latest add dropdown-menu
+npx shadcn-ui@latest add form
+npx shadcn-ui@latest add input
 ```
 ## DB creation/setup
 The following is the procedure to create the DB from zero:
@@ -75,6 +84,10 @@ npm install @primsa/client
 npx prisma generate
 npx prisma db push
 ```
+
+
+
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

@@ -42,7 +42,7 @@ const NavbarMain = () => {
                 Browse posts
               </Button>
             </Link>
-            <Link href="/dashboard/myposts/create">
+            <Link href="/dashboard/create">
               <Button size="sm" variant="secondary">
                 Create a post
               </Button>

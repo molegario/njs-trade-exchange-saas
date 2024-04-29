@@ -3,6 +3,7 @@ import { Outfit } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import { ToasterProvider } from "@/components/providers/toaster-provider";
 
 const font = Outfit({ subsets: ["latin"] });
 
@@ -26,6 +27,7 @@ export default function RootLayout({
             enableSystem={false}
             storageKey="inag-theme"
           >
+            <ToasterProvider />
             {children}
           </ThemeProvider>
         </body>

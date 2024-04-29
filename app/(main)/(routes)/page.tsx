@@ -17,10 +17,10 @@ export default function Home() {
         </h1>
         <h1 className="text-4xl font-extrabold text-red-600 mt-8">We can help.</h1>
       </div>
-      <div className="h-[640px] w-[640px] relative">
+      <div className="h-[640px] w-[960px] relative">
         <Image
           className="self-end"
-          src={"/images/truck_back_hero.png"}
+          src={"/images/truck_hero.png"}
           // height={640}
           fill
           // width={640}

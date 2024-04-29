@@ -6,7 +6,7 @@ const Logo = () => {
       className="w-auto"
       fill
       alt="logo"
-      src="/images/logo_inag.svg"
+      src="/images/IKAG_Logo.png"
     />
   );
 };

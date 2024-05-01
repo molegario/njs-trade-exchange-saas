@@ -1,7 +1,7 @@
 import { authMiddleware } from "@clerk/nextjs";
 
 export default authMiddleware({
-  publicRoutes: ["/goodbye", "/", ],
+  publicRoutes: ["/goodbye", "/", "/api/uploadthing"],
 });
 
 //["/((?!.+.[w]+$|_next).*)", "/", "/(api|trpc)(.*)"]

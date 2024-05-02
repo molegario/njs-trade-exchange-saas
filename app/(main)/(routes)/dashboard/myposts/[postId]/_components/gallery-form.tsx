@@ -67,7 +67,7 @@ const GalleryForm = ({
     }
   };
 
-  console.log("GALLERY", initialData.galleryImages);
+  // console.log("GALLERY", initialData.galleryImages);
 
   return (
     <div className="mt-6 border bg-slate-100 rounded-md p-4">

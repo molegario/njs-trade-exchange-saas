@@ -121,6 +121,9 @@ const PostEditor = async ({ params }: { params: { postId: string } }) => {
               </div>
               <SectionForm initialData={post} postId={post.id} />
             </div>
+            <div>
+              
+            </div>
           </div>
         </div>
       </div>

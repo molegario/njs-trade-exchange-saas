@@ -7,6 +7,7 @@ import { LayoutDashboard } from "lucide-react";
 import TitleForm from "./_components/title-form";
 import DescriptionForm from "./_components/description-form";
 import ImageForm from "./_components/image-form";
+import CategoryForm from "./_components/category-form";
 
 const PostEditor = async ({ params }: { params: { postId: string } }) => {
   const {
@@ -41,6 +42,12 @@ const PostEditor = async ({ params }: { params: { postId: string } }) => {
           createdAt: "desc",
         },
       },
+    },
+  });
+
+  const categories = await db.category.findMany({
+    orderBy: {
+      name: "asc",
     },
   });
 
@@ -83,6 +90,18 @@ const PostEditor = async ({ params }: { params: { postId: string } }) => {
             <TitleForm initialData={post} postId={post.id} />
             <DescriptionForm initialData={post} postId={post.id} />
             <ImageForm initialData={post} postId={post.id} />
+            <CategoryForm 
+              initialData={post} 
+              postId={post.id}
+              options={
+                categories.map(
+                  (category) => ({
+                    label: category.name,
+                    value: category.id,
+                  })
+                )
+              } 
+            />
           </div>
         </div>
 

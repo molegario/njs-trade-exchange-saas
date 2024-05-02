@@ -58,7 +58,6 @@ model Attachment {
   url String
   postId String @db.ObjectId
   post Post @relation(fields: [postId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

@@ -3,11 +3,13 @@ import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import PostAction from "./_components/post-action";
 import { IconBadge } from "@/components/icon-badge";
-import { LayoutDashboard } from "lucide-react";
+import { ImageDownIcon, LayoutDashboard, ListChecks } from "lucide-react";
 import TitleForm from "./_components/title-form";
 import DescriptionForm from "./_components/description-form";
 import ImageForm from "./_components/image-form";
 import CategoryForm from "./_components/category-form";
+import SectionForm from "./_components/section-form";
+import GalleryForm from "./_components/gallery-form";
 
 const PostEditor = async ({ params }: { params: { postId: string } }) => {
   const {
@@ -42,6 +44,11 @@ const PostEditor = async ({ params }: { params: { postId: string } }) => {
           createdAt: "desc",
         },
       },
+      galleryImages: {
+        orderBy: {
+          createdAt: "desc",
+        },
+      }
     },
   });
 
@@ -90,21 +97,32 @@ const PostEditor = async ({ params }: { params: { postId: string } }) => {
             <TitleForm initialData={post} postId={post.id} />
             <DescriptionForm initialData={post} postId={post.id} />
             <ImageForm initialData={post} postId={post.id} />
-            <CategoryForm 
-              initialData={post} 
+            <CategoryForm
+              initialData={post}
               postId={post.id}
-              options={
-                categories.map(
-                  (category) => ({
-                    label: category.name,
-                    value: category.id,
-                  })
-                )
-              } 
+              options={categories.map((category) => ({
+                label: category.name,
+                value: category.id,
+              }))}
             />
           </div>
+          <div className="space-y-6">
+            <div>
+              <div className="flex items-center gap-x-2">
+                <IconBadge icon={ImageDownIcon} />
+                <h2 className="text-xl">Post gallery images</h2>
+              </div>
+              <GalleryForm initialData={post} postId={post.id} />
+            </div>
+            <div>
+              <div className="flex items-center gap-x-2">
+                <IconBadge icon={ListChecks} />
+                <h2 className="text-xl">Post sections</h2>
+              </div>
+              <SectionForm initialData={post} postId={post.id} />
+            </div>
+          </div>
         </div>
-
       </div>
     </>
   );

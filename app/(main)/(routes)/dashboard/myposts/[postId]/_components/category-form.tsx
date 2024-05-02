@@ -64,8 +64,6 @@ const CategoryForm = ({ initialData, postId, options }: CategoryFormProps) => {
 
   const { isSubmitting, isValid } = form.formState;
 
-  console.log("XXXX:::", isSubmitting, isValid);
-
   /**
    * Handles the form submission.
    *

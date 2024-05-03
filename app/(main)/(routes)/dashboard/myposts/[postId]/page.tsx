@@ -10,6 +10,7 @@ import ImageForm from "./_components/image-form";
 import CategoryForm from "./_components/category-form";
 import SectionForm from "./_components/section-form";
 import GalleryForm from "./_components/gallery-form";
+import IsPurveyorForm from "./_components/ispurveyor-form";
 
 const PostEditor = async ({ params }: { params: { postId: string } }) => {
   const {
@@ -94,9 +95,9 @@ const PostEditor = async ({ params }: { params: { postId: string } }) => {
               <IconBadge icon={LayoutDashboard} />
               <h2 className="text-xl">Post details</h2>
             </div>
+            <IsPurveyorForm initialData={post} postId={post.id} />
             <TitleForm initialData={post} postId={post.id} />
             <DescriptionForm initialData={post} postId={post.id} />
-            <ImageForm initialData={post} postId={post.id} />
             <CategoryForm
               initialData={post}
               postId={post.id}
@@ -105,6 +106,7 @@ const PostEditor = async ({ params }: { params: { postId: string } }) => {
                 value: category.id,
               }))}
             />
+            <ImageForm initialData={post} postId={post.id} />
           </div>
           <div className="space-y-6">
             <div>
@@ -121,9 +123,7 @@ const PostEditor = async ({ params }: { params: { postId: string } }) => {
               </div>
               <SectionForm initialData={post} postId={post.id} />
             </div>
-            <div>
-              
-            </div>
+            <div></div>
           </div>
         </div>
       </div>

@@ -19,7 +19,8 @@ export async function PATCH(
       !values.title &&
       !values.description &&
       !values.imageUrl &&
-      !values.categoryId
+      !values.categoryId &&
+      !values.isPurveyor
     ) {
       return new NextResponse("No values to update", { status: 400 });
     }

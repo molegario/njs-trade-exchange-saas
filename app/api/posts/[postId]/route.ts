@@ -1,6 +1,7 @@
 import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
+import { isUndefined } from "util";
 
 export async function PATCH(
   req: Request,
@@ -20,7 +21,7 @@ export async function PATCH(
       !values.description &&
       !values.imageUrl &&
       !values.categoryId &&
-      !values.isPurveyor
+      (values.isPurveyor === undefined)  
     ) {
       return new NextResponse("No values to update", { status: 400 });
     }

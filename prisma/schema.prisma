@@ -70,8 +70,10 @@ model Section {
   title String
   description String?
   videoUrl String?
+  imageUrl String?
   position Int
   isPublished Boolean @default(false)
+  isSubscriptionLocked Boolean @default(false)
   muxData MuxData?
   postId String @db.ObjectId
   post Post @relation(fields: [postId], references: [id], onDelete: NoAction, onUpdate: NoAction)

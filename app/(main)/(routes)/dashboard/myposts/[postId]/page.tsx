@@ -86,7 +86,11 @@ const PostEditor = async ({ params }: { params: { postId: string } }) => {
               Complete all fields {completionText}
             </span>
           </div>
-          <PostAction />
+          <PostAction 
+            disabled={!isComplete} 
+            postId={postId} 
+            isPublished={post.isPublished}
+          />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16">

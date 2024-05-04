@@ -9,7 +9,7 @@ import Logo from "./logo";
 const NavbarMain = () => {
   const { userId } = useAuth();
   return (
-    <div className="border-b flex flex-shrink-0 items-center shadow-sm px-5 h-[75px] sticky top-0 z-20 py-1 bg-white">
+    <div className="border-b flex flex-shrink-0 items-center shadow-sm px-5 h-[75px] fixed top-0 z-20 py-1 bg-white w-full">
       <div className="h-full w-[360px] relative pl-0">
         <Link href="/">
           <Logo />

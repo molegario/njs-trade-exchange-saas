@@ -4,18 +4,20 @@ import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
 import { UserButton, useAuth } from "@clerk/nextjs";
 import Link from "next/link";
-import Logo from "./logo";
+import MobileSidebar from "./mobile-sidebar";
+// import Logo from "./logo";
 
 const NavbarMain = () => {
   const { userId } = useAuth();
   return (
-    <div className="border-b flex flex-shrink-0 items-center shadow-sm px-5 h-[75px] fixed top-0 z-20 py-1 bg-white w-full gap-x-1">
+    <div className="p-4 border-b h-full flex items-center bg-white shadow-sm justify-between">
+      <MobileSidebar />
       <div className="h-full w-[360px] relative pl-0">
-        <Link href="/">
+        {/* <Link href="/">
           <Logo />
-        </Link>
+        </Link> */}
       </div>
-      <div className="flex gap-x-2 ml-auto">
+      <div className="flex gap-x-2">
         {!userId && (
           <>
             <Link href="/sign-in">

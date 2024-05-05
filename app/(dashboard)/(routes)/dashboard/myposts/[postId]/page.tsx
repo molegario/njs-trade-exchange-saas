@@ -86,9 +86,9 @@ const PostEditor = async ({ params }: { params: { postId: string } }) => {
               Complete all fields {completionText}
             </span>
           </div>
-          <PostAction 
-            disabled={!isComplete} 
-            postId={postId} 
+          <PostAction
+            disabled={!isComplete}
+            postId={postId}
             isPublished={post.isPublished}
           />
         </div>
@@ -115,17 +115,17 @@ const PostEditor = async ({ params }: { params: { postId: string } }) => {
           <div className="space-y-6">
             <div>
               <div className="flex items-center gap-x-2">
-                <IconBadge icon={ImageDownIcon} />
-                <h2 className="text-xl">Post gallery images</h2>
-              </div>
-              <GalleryForm initialData={post} postId={post.id} />
-            </div>
-            <div>
-              <div className="flex items-center gap-x-2">
                 <IconBadge icon={ListChecks} />
                 <h2 className="text-xl">Post sections</h2>
               </div>
               <SectionForm initialData={post} postId={post.id} />
+            </div>
+            <div>
+              <div className="flex items-center gap-x-2">
+                <IconBadge icon={ImageDownIcon} />
+                <h2 className="text-xl">Post gallery images</h2>
+              </div>
+              <GalleryForm initialData={post} postId={post.id} />
             </div>
             <div></div>
           </div>

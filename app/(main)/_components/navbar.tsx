@@ -18,6 +18,11 @@ const NavbarMain = () => {
       <div className="flex gap-x-2 ml-auto">
         {!userId && (
           <>
+            <Link href="/posts">
+              <Button size="sm" variant="outline">
+                Browse posts
+              </Button>
+            </Link>
             <Link href="/sign-in">
               <Button size="sm" variant="outline">
                 Login

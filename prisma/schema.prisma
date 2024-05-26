@@ -27,6 +27,7 @@ model Post {
   sections Section[]
   galleryImages GalleryImage[]
   attachments Attachment[]  
+  comments Comment[]
   subscriptions Subscription[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -65,6 +66,16 @@ model Attachment {
   @@index(postId)
 }
 
+model Comment {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  email String?
+  name String?
+  userId String
+  postId String @db.ObjectId
+  post Post @relation(fields: [postId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  text String
+}
+
 model Section {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   title String
@@ -77,6 +88,7 @@ model Section {
   muxData MuxData?
   postId String @db.ObjectId
   post Post @relation(fields: [postId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  userProgress UserProgress[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -102,3 +114,26 @@ model Subscription {
   @@index([postId])
 }
 
+model UserProgress {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String
+  sectionId String @db.ObjectId
+  section Section @relation(fields: [sectionId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  isCompleted Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@unique([userId, sectionId])
+  @@index([sectionId])
+}
+
+model Member {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @unique
+  name String
+  email String?
+  displayname String?
+  phone String?
+  Privileges String[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

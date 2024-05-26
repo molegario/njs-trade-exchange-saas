@@ -8,14 +8,12 @@ async function main() {
       data: [
         { name: "Truck" },
         { name: "Heavy Equipment" },
-        { name: "Generator" },
-        { name: "Aqua" },
+        { name: "Generators" },
+        { name: "Water Based Assets" },
         { name: "Elec Equipment" },
         { name: "Vehicle" },
         { name: "Machine" },
         { name: "Service" },
-        { name: "Water Based Assets" },
-        { name: "Generators" },
       ],
     });
     console.log("Success seeding categories!");

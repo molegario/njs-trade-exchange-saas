@@ -9,7 +9,7 @@ interface PostCardProps {
   title: string;
   imageUrl: string;
   sectionsLength: number;
-  progress: number | null;
+  // progress: number | null;
   category: string;
 };
 
@@ -18,14 +18,23 @@ const PostCard = ({
   title,
   imageUrl,
   sectionsLength,
-  progress,
+  // progress,
   category,
 }: PostCardProps) => {
   return (
     <Link href={`/posts/${id}`}>
       <div className="group hover:shadow-sm transition overflow-hidden border rounded-lg p-3 h-full">
         <div className="relative w-full aspect-video rounded-md overflow-hidden">
-          <Image fill className="object-cover" alt={title} src={imageUrl} />
+          {
+            imageUrl && (
+              <img
+                src={imageUrl}
+                alt={title}
+                className="object-cover"
+              />
+            )
+          }
+          {/* <Image fill className="object-cover" alt={title} src={imageUrl} /> */}
         </div>
         <div className="flex flex-col pt-2">
           <div className="text-lg md:text-base font-medium group-hover:text-sky-700 transition live-clamp-2">
@@ -38,7 +47,7 @@ const PostCard = ({
               <span>{sectionsLength}</span> {sectionsLength === 1 ? "section" : "sections"}
             </div>
           </div>
-          {progress !== null ? (
+          {/* {progress !== null ? (
             <div>
               <PostProgress
                 value={progress}
@@ -50,7 +59,7 @@ const PostCard = ({
             <p className="text-md md:text-sm font-medium text-slate-700">
               not subscribed
             </p>
-          )}
+          )} */}
         </div>
       </div>
     </Link>

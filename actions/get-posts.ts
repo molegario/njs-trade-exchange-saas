@@ -1,11 +1,10 @@
 import { db } from "@/lib/db";
 import { Category, Post } from "@prisma/client";
-import { getProgress } from "./get-progress";
 
 type PostWithProgressWithCategory = Post & {
   category: Category | null;
   sections: { id: string }[];
-  progress: number | null;
+  // progress: number | null;
 };
 
 type GetPostsProps = {
@@ -15,9 +14,9 @@ type GetPostsProps = {
 };
 
 export const getPosts = async ({
-  userId,
-  categoryId,
-  title,
+  userId="",
+  categoryId="",
+  title="",
 }: GetPostsProps): Promise<PostWithProgressWithCategory[]> => {
   try {
     const posts = await db.post.findMany({
@@ -26,7 +25,7 @@ export const getPosts = async ({
         title: {
           contains: title,
         },
-        categoryId: categoryId,
+        categoryId: categoryId ? categoryId : undefined,
       },
       include: {
         category: true,
@@ -38,11 +37,6 @@ export const getPosts = async ({
             id: true,
           },
         },
-        subscriptions: {
-          where: {
-            userId,
-          },
-        },
       },
       orderBy: {
         createdAt: "desc",
@@ -51,18 +45,9 @@ export const getPosts = async ({
 
     const postsWithProgress: PostWithProgressWithCategory[] = await Promise.all(
       posts.map(async (post) => {
-        if (post.subscriptions.length === 0) {
-          return {
-            ...post,
-            progress: null,
-          };
-        }
-
-        const progressPercentage = await getProgress(userId, post.id);
 
         return {
           ...post,
-          progress: progressPercentage,
         };
       })
     );

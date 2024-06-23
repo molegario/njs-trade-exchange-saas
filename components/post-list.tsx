@@ -4,7 +4,7 @@ import PostCard from "./post-card";
 export type PostWithProgressWithCategory = Post & {
   category: Category | null;
   sections: { id: string }[];
-  progress: number | null;
+  // progress: number | null;
 };
 
 interface PostsListProps {
@@ -26,7 +26,7 @@ const PostsList = ({
                 title={post.title}
                 imageUrl={post.imageUrl!}
                 sectionsLength={post.sections.length}
-                progress={post.progress}
+                // progress={post.progress}
                 category={post.category?.name || "Uncategorized"}
               />
             )

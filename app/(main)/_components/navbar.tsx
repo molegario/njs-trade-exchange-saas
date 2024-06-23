@@ -1,5 +1,3 @@
-"use client";
-
 import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
 import { UserButton, useAuth } from "@clerk/nextjs";
@@ -7,7 +5,8 @@ import Link from "next/link";
 import Logo from "./logo";
 
 const NavbarMain = () => {
-  const { userId } = useAuth();
+  // const { userId } = useAuth();
+  const userId = null;
   return (
     <div className="border-b flex flex-shrink-0 items-center shadow-sm px-5 h-[75px] fixed top-0 z-20 py-1 bg-white w-full gap-x-1">
       <div className="h-full w-[360px] relative pl-0">

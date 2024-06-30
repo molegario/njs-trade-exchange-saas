@@ -1,14 +1,33 @@
-import CommentsList from "@/app/(main)/_components/comments-list";
-import NewComment from "@/app/(main)/_components/new-comment";
+import CommentsList from "@/app/(search)/_components/comments-list";
+import NewComment from "@/app/(search)/_components/new-comment";
 import Preview from "@/components/preview";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { db } from "@/lib/db";
+import { auth } from "@clerk/nextjs";
 import { ArrowLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-const PostDetails = async ({ params }: { params: { postId: string } }) => {
+const SearchPostDetails = async ({
+  params,
+}: {
+  params: { postId: string };
+}) => {
+  const { userId } = auth();
+
+  if (!userId) {
+    return redirect("/sign-in");
+  }
+
+  // member name
+  const member = await db.member.findUnique({
+    where: {
+      userId: userId,
+    },
+  });
+  const memberName = member?.name || "";
+
   const post = await db.post.findUnique({
     where: {
       id: params.postId,
@@ -16,9 +35,9 @@ const PostDetails = async ({ params }: { params: { postId: string } }) => {
     include: {
       category: true,
       sections: {
-        // where: {
-        //   isPublished: true,
-        // },
+        where: {
+          isPublished: true,
+        },
         orderBy: {
           position: "asc",
         },
@@ -56,16 +75,16 @@ const PostDetails = async ({ params }: { params: { postId: string } }) => {
         <div className="flex items-end justify-between flex-none">
           <div className="flex flex-col gap-y-2 justify-start">
             <Link
-              href="/posts"
-              className="flex items-center text-xl font-semibold hover:opacity-75 transition mb-2"
+              href="/search"
+              className="flex items-center text-xl font-semibold hover:opacity-75 transition mb-2 text-slate-400"
             >
               <ArrowLeft className="h-4 w-4 mr-2" />
-              All posts
+              Back to search
             </Link>
-            <h1 className="text-3xl md:text-4xl font-medium text-black">
+            <h1 className="text-3xl md:text-4xl font-medium text-white">
               {post?.title || `untitled: postID: ${params.postId}`}
             </h1>
-            <span className="text-black font-medium">by TheCommonNonsense</span>
+            <span className="text-white font-medium">by TheCommonNonsense</span>
             <h2 className="text-sm md:hidden text-white font-semibold">
               {humanReadableDateSmall}
             </h2>
@@ -112,26 +131,29 @@ const PostDetails = async ({ params }: { params: { postId: string } }) => {
                 />
               )}
               <div className="flex justify-between">
-                {/* <h2 className="text-2xl mb-4">TLDR</h2> */}
                 {post?.category?.name && (
                   <h2 className="text-2xl mb-4">
                     Category: {post?.category?.name}
                   </h2>
                 )}
               </div>
-              <Tabs defaultValue="comments" className="w-full">
+              <Tabs defaultValue="tldr" className="w-full">
                 <TabsList className="mb-0 mt-5">
-                  <TabsTrigger value="comments">Comments</TabsTrigger>
                   <TabsTrigger value="tldr">TLDR</TabsTrigger>
+                  <TabsTrigger value="comment">Comment</TabsTrigger>
                 </TabsList>
-                <TabsContent
-                  className="mb-0 py-4 flex flex-col gap-y-4"
-                  value="comments"
-                >
-                  <CommentsList comments={post?.comments.reverse()} />
-                </TabsContent>
                 <TabsContent className="mb-0 py-4" value="tldr">
                   <p>{post?.description}</p>
+                </TabsContent>
+                <TabsContent
+                  className="mb-0 py-4 flex flex-col gap-y-4"
+                  value="comment"
+                >
+                  <NewComment postId={post.id} memberName={memberName} />
+                  <CommentsList
+                    comments={post.comments.reverse()}
+                    userId={userId}
+                  />
                 </TabsContent>
               </Tabs>
             </div>
@@ -142,7 +164,7 @@ const PostDetails = async ({ params }: { params: { postId: string } }) => {
   );
 };
 
-export default PostDetails;
+export default SearchPostDetails;
 
 type Props = {
   params: {
